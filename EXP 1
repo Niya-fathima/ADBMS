@@ -169,8 +169,6 @@ mysql> desc invoice_item;
 
 b) DDL COMMANDS- ALTER & DROP
 1. Add a column ‘SSN’ at the first position in the table EMPLOYEE
-
-
 QUERY:
 mysql> desc employee;
 +----------+-------------+------+-----+---------+-------+
@@ -184,13 +182,13 @@ mysql> desc employee;
 | adhar_no | int(20)     | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 6 rows in set (0.00 sec)
+
+
 ----------------------------------------------------------------------------------------------------------------
 
 
 2. Change the data type of the column ‘DOB’  in year the table EMPLOYEE
-
 query:
-
 mysql> alter table employee modify dob year;
 Query OK, 0 rows affected (1.56 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -207,11 +205,13 @@ mysql> desc employee;
 | adhar_no | int(20)     | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 6 rows in set (0.00 sec)
+
+
 ----------------------------------------------------------------------------------------------------------------
+
 
 3. Delete the column ‘emp_id’ the table EMPLOYEE.
 query:
-
 mysql> alter table employee drop column emp_id;
 Query OK, 0 rows affected (0.59 sec)
 Records: 0  Duplicates: 0  Warnings: 0
@@ -227,7 +227,10 @@ mysql> desc employee;
 | adhar_no | int(20)     | YES  |     | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+
 ----------------------------------------------------------------------------------------------------------------
+
 
 4. Add  the constraint unique for columns ‘SSN, ‘adhar_no’ the table EMPLOYEE
 query:
@@ -246,7 +249,10 @@ mysql> desc employee;
 | adhar_no | int(20)     | YES  | UNI | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+
 ----------------------------------------------------------------------------------------------------------------
+
 
 5. Delete the NULL constraint of ‘age’ in the STUDENT table.
 QUERY:
@@ -265,7 +271,10 @@ mysql> desc STUD;
 | gender  | varchar(10) | YES  |     | M       |       |
 +---------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+
 ----------------------------------------------------------------------------------------------------------------
+
 
 6. Change the table name EMPLOYEE as PERSON
 QUERY:
@@ -283,8 +292,11 @@ mysql> desc person;
 | adhar_no | int(20)     | YES  | UNI | NULL    |       |
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+
+
 ----------------------------------------------------------------------------------------------------------------
 
+ 
  7. Delete the table STUDENT1.
  QUERY:
  mysql> drop table DUP_EMP;
@@ -293,6 +305,7 @@ mysql> desc person;
  ERROR 1146 (42S02): Table 'exp1.DUP_EMP' doesn't exist
 
 
+----------------------------------------------------------------------------------------------------------------
 
 
 
