@@ -7,12 +7,9 @@ a) DDL COMMANDS-CREATE
 1.Create a table EMPLOYEE have the following fields (emp_id, name,city,dob,adhar_no)?
 
 QUERY:
-CREATE TABLE employee;????????????????
 MYSQL>CREATE TABLE employee(emp_id INT,name VARCHAR(15),city VARCHAR(50),dob DATE,adhar_no INT(20));
 Query OK, 0 rows affected (0.44 sec)
 
-mysql> DESC EMPLOYEE;
-ERROR 1146 (42S02): Table 'exp1.EMPLOYEE' doesn't exist
 mysql> DESC employee;
 +----------+-------------+------+-----+---------+-------+
 | Field    | Type        | Null | Key | Default | Extra |
@@ -25,7 +22,7 @@ mysql> DESC employee;
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
 
-
+****************************************************************************************************************************************************
  2.Create a table STUDENT have the fields(roll_no, name, age, address, gender)and add following constraints on it.
   Roll_no – Primary key
   Name – does not allow null values
@@ -33,7 +30,7 @@ mysql> DESC employee;
   Gender- default value is ‘m’
 
 QUERY:
-CREATE TABLE STUD(roll_no INT PRIMARY KEY,name VARCHAR(15) NOT NULL,age INT NOT NULL CHECK (AGE>=0 AND AGE<=99),address VARCHAR(50),gender VARCHAR(10)DEFAULT'M');
+MYSQL>CREATE TABLE STUD(roll_no INT PRIMARY KEY,name VARCHAR(15) NOT NULL,age INT NOT NULL CHECK (AGE>=0 AND AGE<=99),address VARCHAR(50),gender VARCHAR(10)DEFAULT'M');
 Query OK, 0 rows affected (0.47 sec)
 
 mysql> DESC STUD;
@@ -49,13 +46,14 @@ mysql> DESC STUD;
 5 rows in set (0.00 sec)
 
 
+****************************************************************************************************************************************************
   3.Create a temporary table STUDENT1 of STUDENT relation.
   
   
   QUERY:
-     CREATE TEMPORARY TABLE stud1 SELECT * FROM STUD;
-     Query OK, 0 rows affected (0.00 sec)
-      DESC stud1;
+   MYSQL>CREATE TEMPORARY TABLE stud1 SELECT * FROM STUD;
+   Query OK, 0 rows affected (0.00 sec)
+   MYSQL>DESC stud1;
 +---------+-------------+------+-----+---------+-------+
 | Field   | Type        | Null | Key | Default | Extra |
 +---------+-------------+------+-----+---------+-------+
@@ -68,12 +66,13 @@ mysql> DESC STUD;
 5 rows in set (0.00 sec)
 
 
-   4.Create a duplicate table of EMPLOYEE.
-   QUERY:
+****************************************************************************************************************************************************
+4.Create a duplicate table of EMPLOYEE.
+QUERY:
    
-  CREATE TABLE IF NOT EXISTS DUP_EMP SELECT * FROM employee;
-  Query OK, 0 rows affected (0.26 sec)
-  desc DUP_EMP;
+ MYSQL> CREATE TABLE IF NOT EXISTS DUP_EMP SELECT * FROM employee;
+ Query OK, 0 rows affected (0.26 sec)
+ MYSQL>desc DUP_EMP;
 +----------+-------------+------+-----+---------+-------+
 | Field    | Type        | Null | Key | Default | Extra |
 +----------+-------------+------+-----+---------+-------+
@@ -85,6 +84,7 @@ mysql> DESC STUD;
 +----------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
 
+****************************************************************************************************************************************************
 5. Create an INVOICE database and having following tables.
    
    Customer(id, name, address, city, ph_no)
@@ -93,7 +93,7 @@ mysql> DESC STUD;
    Invoice_item(inv_id (FK),  pid(FK), quantity)
    
    QUERY:
-   1. create table customer(id int primary key,name varchar(50),address varchar(50),city varchar(50),ph_no varchar(10));
+1.  MYSQL>create table customer(id int primary key,name varchar(50),address varchar(50),city varchar(50),ph_no varchar(10));
     Query OK, 0 rows affected (0.45 sec)
 
 mysql> desc customer;
@@ -107,8 +107,9 @@ mysql> desc customer;
 | ph_no   | varchar(10) | YES  |     | NULL    |       |
 +---------+-------------+------+-----+---------+-------+
 5 rows in set (0.00 sec)
+. . . . . . . . . . . . .  . . . . . . . . . . . . . .. . .  . . . . . . . . . . . . . . . . . . . ..  . . . . ..
 
-2.create table product(pid int primary key,pname varchar(50),price int default 0);
+2. MYSQL>create table product(pid int primary key,pname varchar(50),price int default 0);
 Query OK, 0 rows affected (0.26 sec)
 
 mysql> desc product;
@@ -120,8 +121,9 @@ mysql> desc product;
 | price | int(11)     | YES  |     | 0       |       |
 +-------+-------------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
+. . . . . . . . . . . . .  . . . . . . . . . . . . . .. . .  . . . . . . . . . . . . . . . . . . . ..  . . . . ..
 
-3. create table invoice_master(inv_id int primary key,cust_id int,inv_date date,constraint c_custid foreign key(cust_id) references customer(Id));
+3.MYSQL>create table invoice_master(inv_id int primary key,cust_id int,inv_date date,constraint c_custid foreign key(cust_id) references customer(Id));
 Query OK, 0 rows affected (0.24 sec)
 
 mysql> desc invoice_master;
@@ -133,8 +135,9 @@ mysql> desc invoice_master;
 | inv_date | date    | YES  |     | NULL    |       |
 +----------+---------+------+-----+---------+-------+
 3 rows in set (0.00 sec)
+. . . . . . . . . . . . .  . . . . . . . . . . . . . .. . .  . . . . . . . . . . . . . . . . . . . ..  . . . . ..
 
-4.create table invoice_item(inv_id int,pid int,quantity int,constraint c_invid foreign key(inv_id) references invoice_master(inv_id),constraint c_pid foreign key(pid) references product(pid));
+4.MYSQL>create table invoice_item(inv_id int,pid int,quantity int,constraint c_invid foreign key(inv_id) references invoice_master(inv_id),constraint c_pid foreign key(pid) references product(pid));
 Query OK, 0 rows affected (0.84 sec)
 
 mysql> desc invoice_item;
