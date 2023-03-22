@@ -44,6 +44,118 @@ ________________________________________________________________________________
 
 3.Insert values in INVOICE database
 QUERY:
+mysql> use invoice;
+
+//customer table
+******************
+
+desc customer;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| id      | int(11)     | NO   | PRI | NULL    |       |
+| name    | varchar(50) | YES  |     | NULL    |       |
+| address | varchar(50) | YES  |     | NULL    |       |
+| city    | varchar(50) | YES  |     | NULL    |       |
+| ph_no   | varchar(10) | YES  |     | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql> insert into customer values(1,'raghav','abc street','thrissur',987787723),(2,'ram','vietname street','kolkata',9877877222),(3,'charu','apple street','patna',98778747),(4,'arundati','moon street','iceland',987787755);
+Query OK, 4 rows affected (0.07 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from customer;                                                 
++----+----------+-----------------+----------+------------+
+| id | name     | address         | city     | ph_no      |
++----+----------+-----------------+----------+------------+
+|  1 | raghav   | abc street      | thrissur | 987787723  |
+|  2 | ram      | vietname street | kolkata  | 9877877222 |
+|  3 | charu    | apple street    | patna    | 98778747   |
+|  4 | arundati | moon street     | iceland  | 987787755  |
++----+----------+-----------------+----------+------------+
+4 rows in set (0.00 sec)
+
+mysql> insert into customer(id,name,address,city) value(5,'aparna','gujarat street','jarkhand');
+Query OK, 1 row affected (0.05 sec)
+
+mysql>insert into customer values(6,'john','rain street','agarthala',98778774); 
+Query OK, 1 row affected (0.04 sec)
+
+mysql> insert into customer(id,name,address,city) value(7,'chandrika','new street','sahara');
+Query OK, 1 row affected (0.06 sec)
+
+mysql> insert into customer values(8,'suhail','calicut street','calicut',98778771);
+Query OK, 1 row affected (0.22 sec)
+
+mysql> select * from customer;                                                  
++----+-----------+-----------------+-----------+------------+
+| id | name      | address         | city      | ph_no      |
++----+-----------+-----------------+-----------+------------+
+|  1 | raghav    | abc street      | thrissur  | 987787723  |
+|  2 | ram       | vietname street | kolkata   | 9877877222 |
+|  3 | charu     | apple street    | patna     | 98778747   |
+|  4 | arundati  | moon street     | iceland   | 987787755  |
+|  5 | aparna    | gujarat street  | jarkhand  | NULL       |
+|  6 | john      | rain street     | agarthala | 98778774   |
+|  7 | chandrika | new street      | sahara    | NULL       |
+|  8 | suhail    | calicut street  | calicut   | 98778771   |
++----+-----------+-----------------+-----------+------------+
+8 rows in set (0.00 sec)
+
+//product table
+****************
+desc product;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| pid   | int(11)     | NO   | PRI | NULL    |       |
+| pname | varchar(50) | YES  |     | NULL    |       |
+| price | int(11)     | YES  |     | 0       |       |
++-------+-------------+------+-----+---------+-------+
+3 rows in set (0.00 sec)
+
+mysql> insert into product values(001,'jahangir',100),(002,'sarayu',250),(003,'renju',270),(004,'janaki',300),;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> insert into product values(001,'jahangir',100),(002,'sarayu',250),(003,'renju',270),(004,'janaki',300),(005,'aswathi',320),(006,'minu',550),(007,'hari',700);
+Query OK, 7 rows affected (0.11 sec)
+Records: 7  Duplicates: 0  Warnings: 0
+
+mysql> select * from product;                                                   
++-----+----------+-------+
+| pid | pname    | price |
++-----+----------+-------+
+|   1 | jahangir |   100 |
+|   2 | sarayu   |   250 |
+|   3 | renju    |   270 |
+|   4 | janaki   |   300 |
+|   5 | aswathi  |   320 |
+|   6 | minu     |   550 |
+|   7 | hari     |   700 |
++-----+----------+-------+
+7 rows in set (0.00 sec)
+
+//invoice master
+*****************
+mysql> insert into invoice_master values(100,1,'2022-03-11'),(101,2,'2022-07-21'),(102,2,'2022-07-21'),(103,3,'2023-01-01'),(104,4,'2023-03-22'),(105,5,'2023-03-23'),(106,6,'2023-04-10'),(107,7,'2023-05-25'),(108,8,'2023-06-29');
+Query OK, 9 rows affected (0.10 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    100 |       1 | 2022-03-11 |
+|    101 |       2 | 2022-07-21 |
+|    102 |       2 | 2022-07-21 |
+|    103 |       3 | 2023-01-01 |
+|    104 |       4 | 2023-03-22 |
+|    105 |       5 | 2023-03-23 |
+|    106 |       6 | 2023-04-10 |
+|    107 |       7 | 2023-05-25 |
+|    108 |       8 | 2023-06-29 |
++--------+---------+------------+
+9 rows in set (0.00 sec)
 
 
 
