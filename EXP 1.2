@@ -513,6 +513,88 @@ mysql> select * from invoice_item;
 |    105 |    5 |       39 |
 +--------+------+----------+
 8 rows in set (0.00 sec)
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+
+4. Delete details of employees who does not have phone number. 
+mysql> select * from customer;
++----+-----------+-----------------+----------+------------+
+| id | name      | address         | city     | ph_no      |
++----+-----------+-----------------+----------+------------+
+|  1 | raghav    | abc street      | thrissur | 987787723  |
+|  2 | ram       | vietname street | kolkata  | 9877877222 |
+|  3 | charu     | apple street    | patna    | 98778747   |
+|  4 | arundati  | moon street     | iceland  | 987787755  |
+|  5 | aparna    | gujarat street  | jarkhand | NULL       |
+|  6 | john      | garden street   | chennai  | 9846585275 |
+|  7 | chandrika | new street      | sahara   | NULL       |
++----+-----------+-----------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> delete from customer where ph_no is null;
+Query OK, 2 rows affected (0.22 sec)
+
+mysql> select * from customer;
++----+----------+-----------------+----------+------------+
+| id | name     | address         | city     | ph_no      |
++----+----------+-----------------+----------+------------+
+|  1 | raghav   | abc street      | thrissur | 987787723  |
+|  2 | ram      | vietname street | kolkata  | 9877877222 |
+|  3 | charu    | apple street    | patna    | 98778747   |
+|  4 | arundati | moon street     | iceland  | 987787755  |
+|  6 | john     | garden street   | chennai  | 9846585275 |
++----+----------+-----------------+----------+------------+
+5 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+5. Delete all records from STUDENT table. 
+mysql> select * from STUD;
++---------+---------+------+------------------------------+--------+
+| roll_no | name    | age  | address                      | gender |
++---------+---------+------+------------------------------+--------+
+|       1 | theresa |   19 | 123 street amsterdam         | f      |
+|       2 | ebraham |   22 | 234 street east lake street  | m      |
+|       3 | jaseeca |   21 | yellow street washington     | f      |
+|       4 | emanuel |   22 | pinkvilla street switzerland | m      |
++---------+---------+------+------------------------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> delete from STUD;
+Query OK, 4 rows affected (0.09 sec)
+
+mysql> select * from STUD;
+Empty set (0.00 sec)
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
+6. Delete Invoice details of a particular customer. 
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    100 |       1 | 2022-03-11 |
+|    101 |       2 | 2022-07-21 |
+|    102 |       2 | 2022-07-21 |
+|    103 |       3 | 2023-01-01 |
+|    104 |       4 | 2023-03-22 |
+|    106 |       6 | 2023-04-10 |
++--------+---------+------------+
+6 rows in set (0.00 sec)
+mysql> delete from invoice_master where cust_id=6;
+Query OK, 1 row affected (0.07 sec)
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    100 |       1 | 2022-03-11 |
+|    101 |       2 | 2022-07-21 |
+|    102 |       2 | 2022-07-21 |
+|    103 |       3 | 2023-01-01 |
+|    104 |       4 | 2023-03-22 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+
 
 
 
