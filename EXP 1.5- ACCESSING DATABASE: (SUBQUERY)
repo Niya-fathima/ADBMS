@@ -1,0 +1,128 @@
+
+mysql> SELECT * FROM customer;
++----+----------+-----------------+----------+------------+
+| id | name     | address         | city     | ph_no      |
++----+----------+-----------------+----------+------------+
+|  1 | raghav   | abc street      | thrissur | 987787723  |
+|  2 | ram      | vietname street | kolkata  | 9877877222 |
+|  3 | charu    | apple street    | patna    | 98778747   |
+|  4 | arundati | moon street     | iceland  | 987787755  |
+|  5 | aparna   | gujarat street  | jarkhand | NULL       |
+|  6 | john     | garden street   | chennai  | 9846585275 |
+|  7 | joy      | national street | haryana  | NULL       |
++----+----------+-----------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    100 |       1 | 2022-03-11 |
+|    101 |       2 | 2022-07-21 |
+|    102 |       2 | 2022-07-21 |
+|    103 |       3 | 2023-01-01 |
+|    104 |       4 | 2023-03-22 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+...............................................................................................................................................................
+1. List the customer names of invoice date 3rd February 2023.
+mysql> select name from customer where id in(select cust_id from invoice_master where inv_date='2023-03-22');
++----------+
+| name     |
++----------+
+| arundati |
++----------+
+1 row in set (0.00 sec)
+
+***********************************************************************************************************************************************************
+
+
+mysql> SELECT * FROM product;
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   102 |
+|   2 | paste       |   255 |
+|   3 | brush       |   192 |
+|   4 | ice cream   |   306 |
+|   5 | cookies     |   326 |
+|   6 | cool drinks |   561 |
+|   7 | pencil      |   714 |
++-----+-------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    100 |    3 |        9 |
+|    101 |    4 |       70 |
+|    102 |    5 |        8 |
+|    103 |    6 |        8 |
+|    102 |    7 |       40 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+.....................................................................................................................................................................
+
+
+2. List the product name and price of each invoice item.
+mysql> select pname,price from product where pid in(select pid from invoice_item);
++-------------+-------+
+| pname       | price |
++-------------+-------+
+| brush       |   192 |
+| ice cream   |   306 |
+| cookies     |   326 |
+| cool drinks |   561 |
+| pencil      |   714 |
++-------------+-------+
+5 rows in set (0.00 sec)
+*********************************************************************************************************************************************************
+
+
+mysql> SELECT * FROM product;
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   102 |
+|   2 | paste       |   255 |
+|   3 | brush       |   192 |
+|   4 | ice cream   |   306 |
+|   5 | cookies     |   326 |
+|   6 | cool drinks |   561 |
+|   7 | pencil      |   714 |
++-----+-------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    100 |    3 |        9 |
+|    101 |    4 |       70 |
+|    102 |    5 |        8 |
+|    103 |    6 |        8 |
+|    102 |    7 |       40 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+3. List the product names, only include their purchased quantity more than 3.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
