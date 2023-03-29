@@ -70,9 +70,8 @@ mysql> select * from customer where city in('kolkata','chennai');
 |  6 | john | garden street   | chennai | 9846585275 |
 +----+------+-----------------+---------+------------+
 2 rows in set (0.00 sec)
-
-
 **********************************************************************************************************************************************************
+
 
 6. List the invoice details from 1st January 2023 to 15th august 2023
 
@@ -85,8 +84,8 @@ mysql> select * from invoice_master where inv_date between'2023-01-01' and '2023
 |    104 |       4 | 2023-03-22 |
 +--------+---------+------------+
 2 rows in set (0.00 sec)
-
 **********************************************************************************************************************************************************
+
 
 7. List the customer details who not live in ‘kolkata’.
 mysql> select * from customer where city!='kolkata';
@@ -99,7 +98,117 @@ mysql> select * from customer where city!='kolkata';
 |  6 | john     | garden street | chennai  | 9846585275 |
 +----+----------+---------------+----------+------------+
 4 rows in set (0.00 sec)
-
-
 ***********************************************************************************************************************************************************
+
+
+8. List the customers who have no phone number. 
+
+mysql> select * from customer where ph_no is NULL;
++----+--------+-----------------+----------+-------+
+| id | name   | address         | city     | ph_no |
++----+--------+-----------------+----------+-------+
+|  5 | aparna | gujarat street  | jarkhand | NULL  |
+|  7 | joy    | national street | haryana  | NULL  |
++----+--------+-----------------+----------+-------+
+2 rows in set (0.00 sec)
+*************************************************************************************************************************************************************
+
+9.  Display customer names in descending order.
+
+mysql> select * from customer order by name desc;
++----+----------+-----------------+----------+------------+
+| id | name     | address         | city     | ph_no      |
++----+----------+-----------------+----------+------------+
+|  2 | ram      | vietname street | kolkata  | 9877877222 |
+|  1 | raghav   | abc street      | thrissur | 987787723  |
+|  7 | joy      | national street | haryana  | NULL       |
+|  6 | john     | garden street   | chennai  | 9846585275 |
+|  3 | charu    | apple street    | patna    | 98778747   |
+|  4 | arundati | moon street     | iceland  | 987787755  |
+|  5 | aparna   | gujarat street  | jarkhand | NULL       |
++----+----------+-----------------+----------+------------+
+7 rows in set (0.00 sec)
+***********************************************************************************************************************************************************
+
+
+10. Display the customer details sorted in ascending by city and descending by names.
+mysql> select * from customer order by city asc,name desc;
++----+----------+-----------------+----------+------------+
+| id | name     | address         | city     | ph_no      |
++----+----------+-----------------+----------+------------+
+|  6 | john     | garden street   | chennai  | 9846585275 |
+|  7 | joy      | national street | haryana  | NULL       |
+|  4 | arundati | moon street     | iceland  | 987787755  |
+|  5 | aparna   | gujarat street  | jarkhand | NULL       |
+|  2 | ram      | vietname street | kolkata  | 9877877222 |
+|  3 | charu    | apple street    | patna    | 98778747   |
+|  1 | raghav   | abc street      | thrissur | 987787723  |
++----+----------+-----------------+----------+------------+
+7 rows in set (0.01 sec)
+************************************************************************************************************************************************************
+
+
+11. Find the customer names start with ‘A’.
+mysql> select name from customer where name like 'a%';
++----------+
+| name     |
++----------+
+| arundati |
+| aparna   |
++----------+
+2 rows in set (0.01 sec)
+**********************************************************************************************************************************************************
+
+12. Find the customer names who have ‘j’ or ‘a’ in them.
+mysql> select name from customer where name like 'a%' or name like '%j%';
++----------+
+| name     |
++----------+
+| arundati |
+| aparna   |
+| john     |
+| joy      |
++----------+
+4 rows in set (0.00 sec)
+************************************************************************************************************************************************************
+
+13. Find the customer names who have at least 3 characters.
+mysql> select name from customer where name like '___%';
++----------+
+| name     |
++----------+
+| raghav   |
+| ram      |
+| charu    |
+| arundati |
+| aparna   |
+| john     |
+| joy      |
++----------+
+7 rows in set (0.00 sec)
+**********************************************************************************************************************************************************
+
+14. List the names of customers their names have ‘r’ in second position.
+mysql> mysql> select name from customer where name like '_r%';
++----------+
+| name     |
++----------+
+| arundati |
++----------+
+1 row in set (0.00 sec)
+************************************************************************************************************************************************************
+
+
+15. Find the customer names start with ‘a’ and are at least 3 characters in length.
+mysql> select name from customer where name like 'a___%';
++----------+
+| name     |
++----------+
+| arundati |
+| aparna   |
++----------+
+2 rows in set (0.00 sec)
+
+
+
 
