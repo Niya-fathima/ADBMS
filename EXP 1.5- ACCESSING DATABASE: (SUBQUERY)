@@ -194,7 +194,7 @@ mysql> SELECT DISTINCT NAME FROM customer WHERE Id IN (SELECT cust_id FROM invoi
 1 row in set (0.00 sec)
 
 
-
+//ADD PROPER HEADING
 
 
 
