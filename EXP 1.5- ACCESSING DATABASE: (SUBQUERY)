@@ -25,7 +25,7 @@ mysql> SELECT * FROM invoice_master;
 +--------+---------+------------+
 5 rows in set (0.00 sec)
 ...............................................................................................................................................................
-1. List the customer names of invoice date 3rd February 2023.
+1. List the customer names of invoice date 22nd march 2023.
 mysql> select name from customer where id in(select cust_id from invoice_master where inv_date='2023-03-22');
 +----------+
 | name     |
@@ -108,6 +108,92 @@ mysql> SELECT * FROM invoice_item;
 5 rows in set (0.00 sec)
 
 3. List the product names, only include their purchased quantity more than 3.
+mysql> select pname from product where pid in(select pid from invoice_item where quantity>3);
++-------------+
+| pname       |
++-------------+
+| brush       |
+| ice cream   |
+| cookies     |
+| cool drinks |
+| pencil      |
++-------------+
+5 rows in set (0.00 sec)
+************************************************************************************************************************************************************
+
+
+mysql> SELECT * FROM product;
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   102 |
+|   2 | paste       |   255 |
+|   3 | brush       |   192 |
+|   4 | ice cream   |   306 |
+|   5 | cookies     |   326 |
+|   6 | cool drinks |   561 |
+|   7 | pencil      |   714 |
++-----+-------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> SELECT * FROM invoice_item;
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    100 |    3 |        9 |
+|    101 |    4 |       70 |
+|    102 |    5 |        8 |
+|    103 |    6 |        8 |
+|    102 |    7 |       40 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
+4. Find the product that has no sale.
+mysql> select * from product where pid not in(select pid from invoice_item);
++-----+-----------+-------+
+| pid | pname     | price |
++-----+-----------+-------+
+|   1 | chocolate |   102 |
+|   2 | paste     |   255 |
++-----+-----------+-------+
+2 rows in set (0.00 sec)
+
+*******************************************************************************************************************************************************
+
+5. List the customer names who purchased the items ‘ice cream’ and ‘cookies’.
+mysql> select name from customer where id in(select cust_id from invoice_master where inv_id in(select inv_id from invoice_item where pid in(select pid from product where pname="ice cream" or pname="cookies")));
++------+
+| name |
++------+
+| ram  |
++------+
+1 row in set (0.00 sec)
+***********************************************************************************************************************************************************
+
+
+6. Display the purchased product details of the customer ’raghav’.
+mysql> select * from product where pid in(select pid from invoice_item where inv_id in(select inv_id from invoice_master where cust_id in(select id from customer where name='raghav')));
++-----+-------+-------+
+| pid | pname | price |
++-----+-------+-------+
+|   3 | brush |   192 |
++-----+-------+-------+
+1 row in set (0.00 sec)
+
+***********************************************************************************************************************************************************
+
+
+7. List the names of all customers who have purchased at least 1 products, make sure that no duplicate names in the result.
+
+mysql> SELECT DISTINCT NAME FROM customer WHERE Id IN (SELECT cust_id FROM invoice_master WHERE inv_id IN (SELECT inv_id FROM invoice_item GROUP BY inv_id HAVING COUNT(*)>1));
++------+
+| NAME |
++------+
+| ram  |
++------+
+1 row in set (0.00 sec)
+
+
 
 
 
