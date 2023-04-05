@@ -1,0 +1,80 @@
+1.List product name, price except pencil on price order.
+
+mysql> select pname,price from product where pname!='pencil' order by price asc; 
++-------------+-------+
+| pname       | price |
++-------------+-------+
+| chocolate   |   102 |
+| brush       |   192 |
+| paste       |   255 |
+| ice cream   |   306 |
+| cookies     |   326 |
+| cool drinks |   561 |
++-------------+-------+
+6 rows in set (0.00 sec)
+
+*******************************************************************************************************************************************************************
+
+2.Find minimum, maximum and average price of products.
+
+mysql> select min(price),max(price),avg(price) from product;
++------------+------------+------------+
+| min(price) | max(price) | avg(price) |
++------------+------------+------------+
+|        102 |        714 |   350.8571 |
++------------+------------+------------+
+1 row in set (0.01 sec)
+
+**************************************************************************************************************************************************************
+
+3.Find number of customers in each city.
+
+mysql> select count(*),city from customer group by city;
++----------+----------+
+| count(*) | city     |
++----------+----------+
+|        4 | chennai  |
+|        1 | haryana  |
+|        1 | iceland  |
+|        1 | jarkhand |
+|        1 | kolkata  |
+|        1 | patna    |
+|        1 | thrissur |
++----------+----------+
+7 rows in set (0.00 sec)
+**************************************************************************************************************************************************************
+
+4.Find number of customers in each city, only include city with more than 2 customers.
+
+mysql> select count(*),city from customer group by city having count(*)>2;     
++----------+---------+
+| count(*) | city    |
++----------+---------+
+|        4 | chennai |
++----------+---------+
+1 row in set (0.01 sec)
+
+***********************************************************************************************************************************************************
+
+5.Show data as displayed ‘who, where’ Eg: ‘customer1 lives in Kochi’.
+
+mysql> select concat(name," lives in ",city)as cust_info from customer;
++----------------------------+
+| cust_info                  |
++----------------------------+
+| raghav lives in thrissur   |
+| ram lives in kolkata       |
+| charu lives in patna       |
+| arundati lives in iceland  |
+| aparna lives in jarkhand   |
+| john lives in chennai      |
+| joy lives in haryana       |
+| chandrika lives in chennai |
+| mahi lives in chennai      |
+| ishani lives in chennai    |
++----------------------------+
+10 rows in set (0.00 sec)
+
+
+
+
