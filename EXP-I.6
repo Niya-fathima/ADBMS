@@ -1,0 +1,81 @@
+mysql> select * from customer;                                                 
++----+----------+-----------------+----------+------------+
+| id | name     | address         | city     | ph_no      |
++----+----------+-----------------+----------+------------+
+|  1 | raghav   | abc street      | thrissur | 987787723  |
+|  2 | ram      | vietname street | kolkata  | 9877877222 |
+|  3 | charu    | apple street    | patna    | 98778747   |
+|  4 | arundati | moon street     | iceland  | 987787755  |
+|  5 | aparna   | gujarat street  | jarkhand | NULL       |
+|  6 | john     | garden street   | chennai  | 9846585275 |
+|  7 | joy      | national street | haryana  | NULL       |
++----+----------+-----------------+----------+------------+
+7 rows in set (0.00 sec)
+
+mysql> select * from invoice_master;
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    100 |       1 | 2022-03-11 |
+|    101 |       2 | 2022-07-21 |
+|    102 |       2 | 2022-07-21 |
+|    103 |       3 | 2023-01-01 |
+|    104 |       4 | 2023-03-22 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+
+
+1. Create a view for customers who have purchased products.
+
+mysql> create view cust_view as select * from customer where id in(select cust_id from invoice_master);
+Query OK, 0 rows affected (0.09 sec)
+
+mysql> select * from cust_view;
++----+----------+-----------------+----------+------------+
+| id | name     | address         | city     | ph_no      |
++----+----------+-----------------+----------+------------+
+|  1 | raghav   | abc street      | thrissur | 987787723  |
+|  2 | ram      | vietname street | kolkata  | 9877877222 |
+|  3 | charu    | apple street    | patna    | 98778747   |
+|  4 | arundati | moon street     | iceland  | 987787755  |
++----+----------+-----------------+----------+------------+
+4 rows in set (0.00 sec)
+
+**********************************************************************************************************************************************************
+
+2. Create a view for invoice products[cust_name, , inv_id, product_id, quantity]
+
+create view invoice_product as select customer.name,invoice_master.inv_id,product.pid,invoice_item.quantity from customer inner join invoice_master on customer.id=invoice_master.cust_id inner join invoice_item on invoice_master.inv_id=invoice_item.inv_id inner join product on product.pid=invoice_item.pid;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> select * from invoice_product;
++--------+--------+-----+----------+
+| name   | inv_id | pid | quantity |
++--------+--------+-----+----------+
+| raghav |    100 |   3 |        9 |
+| ram    |    101 |   4 |       70 |
+| ram    |    102 |   5 |        8 |
+| charu  |    103 |   6 |        8 |
+| ram    |    102 |   7 |       40 |
++--------+--------+-----+----------+
+5 rows in set (0.07 sec)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
