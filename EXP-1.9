@@ -95,7 +95,7 @@ mysql> select * from customer where ph_no is null and city="haryana";
 ************************************************************************************************************************************************************
 
 4.List the product names if it finds any records in the invoice items table has quantity =3 (use special operators)
-mysql> select pname from product where pid in(select pid from invoice_item);
+mysql> select pname from product where pid in(select pid from invoice_item); //WRONG QUERY
 +-------------+
 | pname       |
 +-------------+
@@ -108,7 +108,7 @@ mysql> select pname from product where pid in(select pid from invoice_item);
 5 rows in set (0.00 sec)
 
 
-
+//RESUBMIT
 
 
 
