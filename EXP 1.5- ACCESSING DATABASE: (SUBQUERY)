@@ -197,7 +197,7 @@ mysql> SELECT DISTINCT NAME FROM customer WHERE Id IN (SELECT cust_id FROM invoi
 //ADD PROPER HEADING
 
 
-
+//VERIFIED
 
 
 
