@@ -1,0 +1,118 @@
+                                 OPTIMIZING DATABASE: (Using Set, arithmetic, logical and special operators)
+                                 ***************************************************************************
+                                 
+mysql> select * from customer;
++----+-----------+-----------------+----------+------------+
+| id | name      | address         | city     | ph_no      |
++----+-----------+-----------------+----------+------------+
+|  1 | raghav    | abc street      | thrissur | 987787723  |
+|  2 | ram       | vietname street | kolkata  | 9877877222 |
+|  3 | charu     | apple street    | patna    | 98778747   |
+|  4 | arundati  | moon street     | iceland  | 987787755  |
+|  5 | aparna    | gujarat street  | jarkhand | NULL       |
+|  6 | john      | garden street   | chennai  | 9846585275 |
+|  7 | joy       | national street | haryana  | NULL       |
+|  8 | chandrika | her street      | chennai  | 98976577   |
+|  9 | mahi      | his street      | chennai  | 98976522   |
+| 10 | ishani    | the street      | chennai  | 98976500   |
++----+-----------+-----------------+----------+------------+
+10 rows in set (0.00 sec)        
+
+mysql> select * from product;
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   102 |
+|   2 | paste       |   255 |
+|   3 | brush       |   192 |
+|   4 | ice cream   |   306 |
+|   5 | cookies     |   326 |
+|   6 | cool drinks |   561 |
+|   7 | pencil      |   714 |
++-----+-------------+-------+
+7 rows in set (0.00 sec)
+************************************************************************************************************************************************************
+
+1.Display customer_id, city  who lives either in ‘chennai’ or in ‘haryana’
+
+mysql> select id,city from customer where city="chennai" or city="haryana";
++----+---------+
+| id | city    |
++----+---------+
+|  6 | chennai |
+|  7 | haryana |
+|  8 | chennai |
+|  9 | chennai |
+| 10 | chennai |
++----+---------+
+5 rows in set (0.00 sec)
+************************************************************************************************************************************************************
+
+2.Display product details with an updated price amount(new price= old price+5rs)
+
+mysql> select * from product;
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   102 |
+|   2 | paste       |   255 |
+|   3 | brush       |   192 |
+|   4 | ice cream   |   306 |
+|   5 | cookies     |   326 |
+|   6 | cool drinks |   561 |
+|   7 | pencil      |   714 |
++-----+-------------+-------+
+7 rows in set (0.00 sec)
+
+mysql> update product set price=price+5;
+Query OK, 7 rows affected (0.18 sec)
+Rows matched: 7  Changed: 7  Warnings: 0
+
+mysql> select * from product;
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   107 |
+|   2 | paste       |   260 |
+|   3 | brush       |   197 |
+|   4 | ice cream   |   311 |
+|   5 | cookies     |   331 |
+|   6 | cool drinks |   566 |
+|   7 | pencil      |   719 |
++-----+-------------+-------+
+7 rows in set (0.00 sec)
+***********************************************************************************************************************************************************
+
+3.Display customer details who doesn’t have phone number and lives in ‘haryana’ city (use logical operators)
+
+mysql> select * from customer where ph_no is null and city="haryana";
++----+------+-----------------+---------+-------+
+| id | name | address         | city    | ph_no |
++----+------+-----------------+---------+-------+
+|  7 | joy  | national street | haryana | NULL  |
++----+------+-----------------+---------+-------+
+1 row in set (0.00 sec)
+************************************************************************************************************************************************************
+
+4.List the product names if it finds any records in the invoice items table has quantity =3 (use special operators)
+mysql> select pname from product where pid in(select pid from invoice_item);
++-------------+
+| pname       |
++-------------+
+| brush       |
+| ice cream   |
+| cookies     |
+| cool drinks |
+| pencil      |
++-------------+
+5 rows in set (0.00 sec)
+
+
+
+
+
+
+
+
+
+
