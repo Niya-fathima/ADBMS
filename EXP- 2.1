@@ -1,0 +1,115 @@
+                                             PL/SQL PROGRAMS- STORED PROCEDURES 
+                                            ************************************
+1.Create a procedure to display all tables in the invoice database.
+mysql> delimiter //
+mysql> create procedure invoice_tables()
+    -> begin
+    -> select * from customer;
+    -> select * from product;
+    -> select * from invoice_item;
+    -> select * from invoice_master;
+    -> end
+    -> //
+Query OK, 0 rows affected (0.24 sec)
+
+mysql> call invoice_tables()
+    -> //
++----+-----------+-----------------+----------+------------+
+| id | name      | address         | city     | ph_no      |
++----+-----------+-----------------+----------+------------+
+|  1 | raghav    | abc street      | thrissur | 987787723  |
+|  2 | ram       | vietname street | kolkata  | 9877877222 |
+|  3 | charu     | apple street    | patna    | 98778747   |
+|  4 | arundati  | moon street     | iceland  | 987787755  |
+|  5 | aparna    | gujarat street  | jarkhand | NULL       |
+|  6 | john      | garden street   | chennai  | 9846585275 |
+|  7 | joy       | national street | haryana  | NULL       |
+|  8 | chandrika | her street      | chennai  | 98976577   |
+|  9 | mahi      | his street      | chennai  | 98976522   |
+| 10 | ishani    | the street      | chennai  | 98976500   |
++----+-----------+-----------------+----------+------------+
+10 rows in set (0.00 sec)
+
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   107 |
+|   2 | paste       |   260 |
+|   3 | brush       |   197 |
+|   4 | ice cream   |   311 |
+|   5 | cookies     |   331 |
+|   6 | cool drinks |   566 |
+|   7 | pencil      |   719 |
++-----+-------------+-------+
+7 rows in set (0.00 sec)
+
++--------+------+----------+
+| inv_id | pid  | quantity |
++--------+------+----------+
+|    100 |    3 |        9 |
+|    101 |    4 |       70 |
+|    102 |    5 |        8 |
+|    103 |    6 |        8 |
+|    102 |    7 |       40 |
++--------+------+----------+
+5 rows in set (0.00 sec)
+
++--------+---------+------------+
+| inv_id | cust_id | inv_date   |
++--------+---------+------------+
+|    100 |       1 | 2022-03-11 |
+|    101 |       2 | 2022-07-21 |
+|    102 |       2 | 2022-07-21 |
+|    103 |       3 | 2023-01-01 |
+|    104 |       4 | 2023-03-22 |
++--------+---------+------------+
+5 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+************************************************************************************************************************************************************
+
+2.Create a procedure to find greatest of 3 numbers.
+mysql> delimiter **
+mysql> create procedure in_greatest(a int,b int,c int)
+    -> begin
+    -> if(a>b) and (a>c) then
+    -> select a as 'Greatest';
+    -> elseif(b>a) and (b>c) then
+    -> select b as 'Greatest';
+    -> else
+    -> select c as 'Greatest';
+    -> end if;
+    -> end **
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> call in_greatest(-1,100,854)
+    -> **
++----------+
+| Greatest |
++----------+
+|      854 |
++----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
+
+
+**********************************************************************************************************************************************************
+
+3.Create a procedure to display invoice details of a particular customer.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
