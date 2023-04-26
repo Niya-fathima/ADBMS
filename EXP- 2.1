@@ -95,9 +95,24 @@ mysql> call in_greatest(-1,100,854)
 Query OK, 0 rows affected (0.00 sec)
 
 
-**********************************************************************************************************************************************************
+*********************************************************************************************************************************************************
 
 3.Create a procedure to display invoice details of a particular customer.
+mysql> create procedure custp(n varchar(30)) begin select customer.name,invoice_master.*,product.pname,invoice_item.pid,invoice_item.quantity from invoice_item inner join invoice_master on invoice_master.inv_id=invoice_item.inv_id inner join product on product.pid=invoice_item.pid inner join customer on customer.id=invoice_master.cust_id where customer.name=n;
+    -> end //
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> call custp('ram');//
++------+--------+---------+------------+-----------+------+----------+
+| name | inv_id | cust_id | inv_date   | pname     | pid  | quantity |
++------+--------+---------+------------+-----------+------+----------+
+| ram  |    101 |       2 | 2022-07-21 | ice cream |    4 |       70 |
+| ram  |    102 |       2 | 2022-07-21 | cookies   |    5 |        8 |
+| ram  |    102 |       2 | 2022-07-21 | pencil    |    7 |       40 |
++------+--------+---------+------------+-----------+------+----------+
+3 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.00 sec)
 
 
 
