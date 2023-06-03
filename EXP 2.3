@@ -2,9 +2,120 @@
                                                   *********************************************
 1. Create a trigger to handle updates to the customer table.
 
-mysql> delimiter// 
-mysql> create table customer_11(id int,name varchar(15),address varchar(15),city varchar(25),phno bigint);
-Query OK, 0 rows affected (0.28 sec)
+mysql> delimiter //
+mysql> create table cust_2(id int,name varchar(15),address varchar(15),city varchar(25),ph_no bigint); //
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> delimiter //
+mysql> create trigger updates
+    -> before update
+    -> on customer for each row
+    -> begin
+    -> insert into cust_2
+    -> values(old.id,old.name,old.address,old.city,old.ph_no);
+    -> end //
+Query OK, 0 rows affected (0.27 sec)
+
+mysql> select * from customer;                                            
+    -> //
++----+-----------+-----------------+----------+------------+
+| id | name      | address         | city     | ph_no      |
++----+-----------+-----------------+----------+------------+
+|  1 | raghav    | abc street      | thrissur | 987787723  |
+|  2 | ram       | vietname street | kolkata  | 9877877222 |
+|  3 | charu     | apple street    | patna    | 98778747   |
+|  4 | arundati  | moon street     | iceland  | 987787755  |
+|  5 | aparna    | gujarat street  | jarkhand | NULL       |
+|  6 | john      | garden street   | chennai  | 9846585275 |
+|  7 | joy       | national street | haryana  | NULL       |
+|  8 | chandrika | her street      | chennai  | 98976577   |
+|  9 | mahi      | his street      | chennai  | 98976522   |
+| 10 | ishani    | the street      | chennai  | 98976500   |
++----+-----------+-----------------+----------+------------+
+10 rows in set (0.00 sec)
+
+mysql> update customer set city="chennai" where id=1;
+    -> //
+Query OK, 1 row affected (0.07 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from cust_2;
+    -> //
++------+-----------+------------+----------+-----------+
+| id   | name      | address    | city     | ph_no     |
++------+-----------+------------+----------+-----------+
+|    8 | chandrika | her street | chennai  |  98976577 |
+|    1 | raghav    | abc street | thrissur | 987787723 |
++------+-----------+------------+----------+-----------+
+2 rows in set (0.00 sec)
+
+mysql> select * from customer;
+    -> //
++----+-----------+-----------------+----------+------------+
+| id | name      | address         | city     | ph_no      |
++----+-----------+-----------------+----------+------------+
+|  1 | raghav    | abc street      | chennai  | 987787723  |
+|  2 | ram       | vietname street | kolkata  | 9877877222 |
+|  3 | charu     | apple street    | patna    | 98778747   |
+|  4 | arundati  | moon street     | iceland  | 987787755  |
+|  5 | aparna    | gujarat street  | jarkhand | NULL       |
+|  6 | john      | garden street   | chennai  | 9846585275 |
+|  7 | joy       | national street | haryana  | NULL       |
+|  8 | chandrika | her street      | chennai  | 98976577   |
+|  9 | mahi      | his street      | chennai  | 98976522   |
+| 10 | ishani    | the street      | chennai  | 98976500   |
++----+-----------+-----------------+----------+------------+
+10 rows in set (0.00 sec)
+*****************************************************************************************************************************************************************
+
+2. Create a trigger to handle inserts to the product relation ( if price < 5 the set price to 10).
+
+mysql> delimiter //
+mysql> create trigger products_price
+    -> before insert
+    -> on product
+    -> for each row
+    -> begin
+    -> if new.price<5 then
+    -> set new.price=10;
+    -> end if
+    -> ;
+    -> end //
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> select * from product;
+    -> //
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   107 |
+|   2 | paste       |   260 |
+|   3 | brush       |   197 |
+|   4 | ice cream   |   311 |
+|   5 | cookies     |   331 |
+|   6 | cool drinks |   566 |
+|   7 | pencil      |   719 |
++-----+-------------+-------+
+7 rows in set (0.13 sec)
+
+mysql> insert into product values(8,'brownie',200);//
+Query OK, 1 row affected (0.09 sec)
+
+mysql> select * from product;//
++-----+-------------+-------+
+| pid | pname       | price |
++-----+-------------+-------+
+|   1 | chocolate   |   107 |
+|   2 | paste       |   260 |
+|   3 | brush       |   197 |
+|   4 | ice cream   |   311 |
+|   5 | cookies     |   331 |
+|   6 | cool drinks |   566 |
+|   7 | pencil      |   719 |
+|   8 | brownie     |   200 |
++-----+-------------+-------+
+8 rows in set (0.00 sec)
+
 
 
 
