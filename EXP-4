@@ -1,0 +1,41 @@
+NoSQL – RETRIEVING DATA
+========================================
+
+
+
+1.Write a MongoDB query to display the customer documents having city ‘vayanad’,’calicut’.
+========================================================================================
+> db.customer.find()
+{ "_id" : ObjectId("64898c596168da703d5cc47f"), "name" : "sana", "city" : "wayanad", "phno" : "9074567510", "age" : 23 }
+{ "_id" : ObjectId("64898c8f6168da703d5cc480"), "name" : "faizy", "city" : "ernakulam", "phno" : "9074567533", "age" : 52 }
+{ "_id" : ObjectId("64898cb96168da703d5cc482"), "name" : "yamuna", "city" : "kollam", "phno" : "9074567500", "age" : 25 }
+> db.customer.find({$or:[{"city":"vayanad"},{"city":"kollam"}]}).pretty();
+{
+	"_id" : ObjectId("64898cb96168da703d5cc482"),
+	"name" : "yamuna",
+	"city" : "kollam",
+	"phno" : "9074567500",
+	"age" : 25
+}
+> db.customer.find({$or:[{"city":"eranakulam"},{"city":"kollam"}]}).pretty();
+{
+	"_id" : ObjectId("64898cb96168da703d5cc482"),
+	"name" : "yamuna",
+	"city" : "kollam",
+	"phno" : "9074567500",
+	"age" : 25
+}
+
+2) Write a MongoDB query to display all customer documents who have age >50.
+============================================================================
+> db.customer.find({"age":{$gt:50}})
+{ "_id" : ObjectId("64898c8f6168da703d5cc480"), "name" : "faizy", "city" : "ernakulam", "phno" : "9074567533", "age" : 52 }
+
+3) Write a MongoDB query to find customer documents who not live in ‘trivandrum’.
+===========================================================================
+> db.customer.find({"city":{$ne:"trivandrum"}})
+{ "_id" : ObjectId("64898c596168da703d5cc47f"), "name" : "sana", "city" : "wayanad", "phno" : "9074567510", "age" : 23 }
+{ "_id" : ObjectId("64898c8f6168da703d5cc480"), "name" : "faizy", "city" : "ernakulam", "phno" : "9074567533", "age" : 52 }
+{ "_id" : ObjectId("64898cb96168da703d5cc482"), "name" : "yamuna", "city" : "kollam", "phno" : "9074567500", "age" : 25 }
+
+----------------------------------------------------------------------------------------------------------------------------------
