@@ -1,0 +1,79 @@
+1.Write a MongoDB query to create a user “CUSTOMER1” and grant the read role in the INVOICE database.
+-----------------------------------------------------------------------------------------------------
+> use admin
+switched to db admin
+> db.createUser({user:"customer1",pwd:"1111",roles:[{role:"read",db:"invoice"}]})
+Successfully added user: {
+	"user" : "customer1",
+	"roles" : [
+		{
+			"role" : "read",
+			"db" : "invoice"
+		}
+	]
+}
+
+
+$  mongo -u customer1 -p
+MongoDB shell version v4.4.22
+Enter password: 
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("54479ebb-7033-4b31-8b99-5ed632115f50") }
+MongoDB server version: 4.4.22
+---
+The server generated these startup warnings when booting: 
+        2023-06-15T14:41:57.671+05:30: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2023-06-15T14:41:59.763+05:30: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+
+
+
+2.Write a MongoDB query to create the backup for the INVOICE database.
+---------------------------------------------------------------------
+$ mongodump --db invoice
+2023-06-15T15:40:36.279+0530	writing invoice.customer to dump/invoice/customer.bson
+2023-06-15T15:40:36.390+0530	writing invoice.product to dump/invoice/product.bson
+2023-06-15T15:40:36.390+0530	done dumping invoice.product (4 documents)
+2023-06-15T15:40:36.462+0530	done dumping invoice.customer (3 documents)
+
+
+3.Write a MongoDB query to restore a particular database or a collection.
+-------------------------------------------------------------------------
+> use invoice
+switched to db invoice
+> db.dropDatabase()
+{ "dropped" : "invoice", "ok" : 1 }
+
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+
+ksb@ksb-ThinkCentre-Edge72:~$ mongorestore --db invoice dump/invoice
+2023-06-15T15:44:57.307+0530	The --db and --collection flags are deprecated for this use-case; please use --nsInclude instead, i.e. with --nsInclude=${DATABASE}.${COLLECTION}
+2023-06-15T15:44:57.307+0530	building a list of collections to restore from dump/invoice dir
+2023-06-15T15:44:57.307+0530	reading metadata for invoice.customer from dump/invoice/customer.metadata.json
+2023-06-15T15:44:57.307+0530	reading metadata for invoice.product from dump/invoice/product.metadata.json
+2023-06-15T15:44:57.308+0530	restoring to existing collection invoice.customer without dropping
+2023-06-15T15:44:57.308+0530	restoring invoice.customer from dump/invoice/customer.bson
+2023-06-15T15:44:57.308+0530	restoring to existing collection invoice.product without dropping
+2023-06-15T15:44:57.309+0530	restoring invoice.product from dump/invoice/product.bson
+2023-06-15T15:44:57.375+0530	continuing through error: E11000 duplicate key error collection: invoice.customer index: _id_ dup key: { _id: ObjectId('64898c596168da703d5cc47f') }
+2023-06-15T15:44:57.375+0530	continuing through error: E11000 duplicate key error collection: invoice.customer index: _id_ dup key: { _id: ObjectId('64898c8f6168da703d5cc480') }
+2023-06-15T15:44:57.375+0530	continuing through error: E11000 duplicate key error collection: invoice.customer index: _id_ dup key: { _id: ObjectId('64898cb96168da703d5cc482') }
+2023-06-15T15:44:57.375+0530	finished restoring invoice.customer (0 documents, 3 failures)
+2023-06-15T15:44:57.375+0530	continuing through error: E11000 duplicate key error collection: invoice.product index: _id_ dup key: { _id: ObjectId('64898d376168da703d5cc483') }
+2023-06-15T15:44:57.375+0530	continuing through error: E11000 duplicate key error collection: invoice.product index: _id_ dup key: { _id: ObjectId('64898d376168da703d5cc484') }
+2023-06-15T15:44:57.375+0530	continuing through error: E11000 duplicate key error collection: invoice.product index: _id_ dup key: { _id: ObjectId('64898d376168da703d5cc485') }
+2023-06-15T15:44:57.375+0530	continuing through error: E11000 duplicate key error collection: invoice.product index: _id_ dup key: { _id: ObjectId('64898d376168da703d5cc486') }
+2023-06-15T15:44:57.375+0530	finished restoring invoice.product (0 documents, 4 failures)
+2023-06-15T15:44:57.375+0530	no indexes to restore for collection invoice.product
+2023-06-15T15:44:57.375+0530	no indexes to restore for collection invoice.customer
+2023-06-15T15:44:57.375+0530	0 document(s) restored successfully. 7 document(s) failed to restore.
+
+> show dbs
+admin    0.000GB
+config   0.000GB
+invoice  0.000GB
+local    0.000GB
+
