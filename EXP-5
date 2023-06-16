@@ -24,3 +24,5 @@ AGGREGATE FUNCTIONS AND REGULAR EXPRESSIONS
 { "_id" : "ernakulam", "max_age" : 52, "min_age" : 52 }
 { "_id" : "kollam", "max_age" : 25, "min_age" : 25 }
 { "_id" : "wayanad", "max_age" : 23, "min_age" : 23 }
+
+//VERIFIED
